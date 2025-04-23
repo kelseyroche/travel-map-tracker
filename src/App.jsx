@@ -4,7 +4,7 @@
 // import Header from './components/Header';
 // import './index.css';
 // import html2canvas from 'html2canvas';
-// import logo from './assets/map_logo.png'; // Adjust path as needed
+// import logo from './assets/map_logo.png';
 
 // const App = () => {
 //   const [markers, setMarkers] = useState([]);
@@ -35,7 +35,7 @@
 //       const canvas = await html2canvas(element, {
 //         useCORS: true,
 //         logging: false,
-//         scale: 2, // sharper image
+//         scale: 2,
 //       });
 //       const link = document.createElement('a');
 //       link.href = canvas.toDataURL('image/jpeg');
@@ -54,13 +54,13 @@
 
 //   const handleDownloadStory = async () => {
 //     setShowStoryView(true);
-//     await new Promise((resolve) => setTimeout(resolve, 1000)); // Let it render
+//     await new Promise((resolve) => setTimeout(resolve, 1000));
 
 //     const tiles = storyRef.current.querySelectorAll('.leaflet-tile');
 //     const loadedTiles = Array.from(tiles).filter((tile) => tile.complete);
 
 //     if (loadedTiles.length !== tiles.length) {
-//       await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for tiles
+//       await new Promise((resolve) => setTimeout(resolve, 1000));
 //     }
 
 //     await downloadImage(storyRef.current, 'story.jpg');
@@ -87,62 +87,24 @@
 //         </div>
 //       </div>
 
-//       {/* Story view for download */}
 //       {showStoryView && (
-//         <div
-//           className="story-container"
-//           ref={storyRef}
-//           style={{
-//             width: '1080px',
-//             height: '1920px',
-//             backgroundColor: '#f7f7f7',
-//             padding: '40px',
-//             display: 'flex',
-//             flexDirection: 'column',
-//             justifyContent: 'space-between',
-//             alignItems: 'center',
-//             position: 'fixed',
-//             top: 0,
-//             left: 0,
-//             zIndex: 9999,
-//             fontFamily: 'sans-serif',
-//           }}
-//         >
-//           <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>My Travel Story</h1>
-
-//           <div
-//             style={{
-//               width: '100%',
-//               height: '50%',
-//               border: '2px solid #ccc',
-//               marginBottom: '30px',
-//             }}
-//           >
+//         <div className="story-container" ref={storyRef}>
+//           <h1>My Travel Story</h1>
+//           <div className="map-section">
 //             <MapComponent
 //               markers={markers}
 //               addMarker={() => {}}
 //               updateMarker={() => {}}
 //             />
 //           </div>
-
-//           <div style={{ width: '100%', textAlign: 'left' }}>
-//             <p style={{ fontSize: '18px' }}>
-//               I have travelled to <strong>{markers.length}</strong> places across{' '}
-//               <strong>
-//                 {
-//                   new Set(
-//                     markers.map((m) =>
-//                       m.placeName.includes(',') ? m.placeName.split(',').pop().trim() : m.placeName
-//                     )
-//                   ).size
-//                 }
-//               </strong>{' '}
-//               {markers.length === 1 ? 'country' : 'countries'}!
+//           <div className="summary">
+//             <p>
+//               I have travelled to <strong>{markers.length}</strong> places!
 //             </p>
-//             <ul style={{ paddingLeft: '20px' }}>
-//               {markers.map((marker, index) => (
-//                 <li key={index} style={{ marginBottom: '10px' }}>
-//                   <strong>{marker.placeName}</strong>: {marker.notes}
+//             <ul>
+//               {[...new Set(markers.map((m) => m.placeName.split(',').pop().trim()))].map((country, index) => (
+//                 <li key={index}>
+//                   <strong>{country}</strong>
 //                 </li>
 //               ))}
 //             </ul>
@@ -154,20 +116,20 @@
 // };
 
 // export default App;
-
 import React, { useState, useRef } from 'react';
 import MapComponent from './components/MapComponent';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import './index.css';
 import html2canvas from 'html2canvas';
-import logo from './assets/map_logo.png'; // Adjust path as needed
+import logo from './assets/map_logo.png';
 
 const App = () => {
   const [markers, setMarkers] = useState([]);
   const mapRef = useRef(null);
   const storyRef = useRef(null);
   const [showStoryView, setShowStoryView] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const addMarker = (newMarker) => {
     setMarkers((currentMarkers) => [...currentMarkers, newMarker]);
@@ -192,7 +154,7 @@ const App = () => {
       const canvas = await html2canvas(element, {
         useCORS: true,
         logging: false,
-        scale: 2, // sharper image
+        scale: 2,
       });
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/jpeg');
@@ -211,17 +173,21 @@ const App = () => {
 
   const handleDownloadStory = async () => {
     setShowStoryView(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Let it render
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const tiles = storyRef.current.querySelectorAll('.leaflet-tile');
     const loadedTiles = Array.from(tiles).filter((tile) => tile.complete);
 
     if (loadedTiles.length !== tiles.length) {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for tiles
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
     await downloadImage(storyRef.current, 'story.jpg');
     setShowStoryView(false);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
   };
 
   return (
@@ -234,6 +200,8 @@ const App = () => {
           onDownloadMap={handleDownloadMap}
           onDownloadStory={handleDownloadStory}
           logo={logo}
+          isOpen={isSidebarOpen}
+          toggleSidebar={toggleSidebar}
         />
         <div className="map-and-controls" style={{ flexGrow: 1 }} ref={mapRef}>
           <MapComponent
@@ -244,7 +212,6 @@ const App = () => {
         </div>
       </div>
 
-      {/* Story view for download */}
       {showStoryView && (
         <div className="story-container" ref={storyRef}>
           <h1>My Travel Story</h1>
@@ -257,22 +224,12 @@ const App = () => {
           </div>
           <div className="summary">
             <p>
-              I have travelled to <strong>{markers.length}</strong> places across{' '}
-              <strong>
-                {
-                  new Set(
-                    markers.map((m) =>
-                      m.placeName.includes(',') ? m.placeName.split(',').pop().trim() : m.placeName
-                    )
-                  ).size
-                }
-              </strong>{' '}
-              {markers.length === 1 ? 'country' : 'countries'}!
+              I have travelled to <strong>{markers.length}</strong> places!
             </p>
             <ul>
-              {markers.map((marker, index) => (
+              {[...new Set(markers.map((m) => m.placeName.split(',').pop().trim()))].map((country, index) => (
                 <li key={index}>
-                  <strong>{marker.placeName}</strong>: {marker.notes}
+                  <strong>{country}</strong>
                 </li>
               ))}
             </ul>

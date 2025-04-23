@@ -1,7 +1,7 @@
 
 // import React from 'react';
 
-// const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory }) => {
+// const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory, logo }) => {
 //   const uniqueCountries = new Set(markers.map(marker => marker.placeName.split(',').pop().trim()));
 //   const countryCount = uniqueCountries.size;
 
@@ -23,20 +23,23 @@
 //         <button onClick={onDownloadMap}>Download Map</button>
 //         <button onClick={onDownloadStory}>Download Story</button>
 //       </div>
+//       <img src={logo} alt="Logo" className="sidebar-logo" />
 //     </div>
 //   );
 // };
 
 // export default Sidebar;
-
 import React from 'react';
 
-const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory, logo }) => {
+const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory, logo, isOpen, toggleSidebar }) => {
   const uniqueCountries = new Set(markers.map(marker => marker.placeName.split(',').pop().trim()));
   const countryCount = uniqueCountries.size;
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+      <div className="toggle-icon" onClick={toggleSidebar}>
+        {isOpen ? '◀' : '▶'}
+      </div>
       <h2>Visited Places</h2>
       <p>I have travelled to {countryCount} {countryCount === 1 ? 'country' : 'countries'}!</p>
       <ul>

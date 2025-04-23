@@ -1,4 +1,3 @@
-
 // import React from 'react';
 // import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 // import 'leaflet/dist/leaflet.css';
@@ -24,7 +23,7 @@
 //     <MapContainer
 //       center={[51.505, -0.09]}
 //       zoom={2}
-//       style={{ height: '100vh', width: '100%' }}
+//       style={{ height: '100%', width: '100%' }}
 //       className="map-container"
 //     >
 //       <TileLayer
@@ -71,8 +70,8 @@ const MapComponent = ({ markers, addMarker, updateMarker }) => {
 
   return (
     <MapContainer
-      center={[51.505, -0.09]}
-      zoom={2}
+      center={[20, 0]}  // Central coordinates for a global view
+      zoom={2}          // Adjusted zoom for showing the full world map
       style={{ height: '100%', width: '100%' }}
       className="map-container"
     >
