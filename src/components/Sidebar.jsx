@@ -2,7 +2,6 @@
 // import React from 'react';
 
 // const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory }) => {
-//   // Extract unique countries from markers
 //   const uniqueCountries = new Set(markers.map(marker => marker.placeName.split(',').pop().trim()));
 //   const countryCount = uniqueCountries.size;
 
@@ -32,7 +31,7 @@
 
 import React from 'react';
 
-const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory }) => {
+const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory, logo }) => {
   const uniqueCountries = new Set(markers.map(marker => marker.placeName.split(',').pop().trim()));
   const countryCount = uniqueCountries.size;
 
@@ -54,6 +53,7 @@ const Sidebar = ({ markers, deleteMarker, onDownloadMap, onDownloadStory }) => {
         <button onClick={onDownloadMap}>Download Map</button>
         <button onClick={onDownloadStory}>Download Story</button>
       </div>
+      <img src={logo} alt="Logo" className="sidebar-logo" />
     </div>
   );
 };

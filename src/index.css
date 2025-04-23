@@ -1,11 +1,18 @@
+@font-face {
+  font-family: 'Air Planet';
+  src: url('./assets/fonts/AirPlanet.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #0f4674;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +22,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #1ca8da;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #0f4674;
 }
 
 body {
@@ -28,45 +35,65 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Lato', sans-serif;
+  background-color: #ffffff;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #0f4674;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #1ca8da;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #0f4674;
+  transform: scale(1.05);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c2323e;
+  color: white;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 60px; /* Maintain header height */
 }
-/* added by me */
+
+.app-favicon {
+  height: 70px;
+  margin-right: 20px;
+  position: absolute;
+  left: 20px;
+}
+
+.app-title {
+  font-size: 45px; /* Increased font size */
+  font-weight: bold;
+  font-family: 'Air Planet', sans-serif;
+  line-height: 60px; /* Align text vertically within the header */
+}
+
 .app-container {
   display: flex;
   flex-direction: row;
@@ -76,22 +103,158 @@ button:focus-visible {
 
 .sidebar {
   width: 250px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   overflow-y: auto;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  color: #1ca8da;
+}
+
+.sidebar p {
+  color: #0f4674;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.sidebar li:hover {
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+}
+
+.sidebar li h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #1ca8da;
+}
+
+.sidebar li button {
+  background-color: #c2323e;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar li button:hover {
+  background-color: #a82932;
+  transform: scale(1.05);
+}
+
+.download-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.download-buttons button {
+  background-color: #1ca8da;
+  border: none;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.download-buttons button:hover {
+  background-color: #0f4674;
+  transform: scale(1.05);
 }
 
 .map-and-controls {
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
 }
 
 .map-container {
-  flex-grow: 1;
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
-.download-buttons {
-  padding: 10px;
+.story-container {
+  background-color: #ffffff; /* White background for clarity */
+  font-family: 'Lato', sans-serif;
+  width: 1080px;
+  height: 1920px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px; /* Rounded corners */
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.story-container h1 {
+  font-family: 'Air Planet', sans-serif;
+  font-size: 48px;
+  color: #0f4674; /* Dark blue for text */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.story-container .map-section {
+  width: 100%;
+  height: 50%;
+  border: 2px solid #e0e0e0;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-container .map-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-container .summary {
+  width: 100%;
+  text-align: left;
+  font-size: 20px;
+  color: #0f4674;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 8px;
+}
+
+.story-container .summary p {
+  margin-bottom: 15px;
+}
+
+.story-container .summary ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.story-container .summary ul li {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.sidebar-logo {
+  display: block;
+  margin: 20px auto 0;
+  width: 80%;
+  max-width: 150px;
+  height: auto;
 }
