@@ -132,6 +132,7 @@ import Header from './components/Header';
 import './index.css';
 import html2canvas from 'html2canvas';
 import logo from './assets/map_logo.png';
+import 'leaflet/dist/leaflet.css'
 
 const App = () => {
   const [markers, setMarkers] = useState([]);
