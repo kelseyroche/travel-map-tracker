@@ -1,3 +1,4 @@
+
 // import React, { useState, useRef } from 'react';
 // import MapComponent from './components/MapComponent';
 // import Sidebar from './components/Sidebar';
@@ -11,6 +12,7 @@
 //   const mapRef = useRef(null);
 //   const storyRef = useRef(null);
 //   const [showStoryView, setShowStoryView] = useState(false);
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
 //   const addMarker = (newMarker) => {
 //     setMarkers((currentMarkers) => [...currentMarkers, newMarker]);
@@ -67,6 +69,10 @@
 //     setShowStoryView(false);
 //   };
 
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen((prev) => !prev);
+//   };
+
 //   return (
 //     <>
 //       <Header />
@@ -77,6 +83,8 @@
 //           onDownloadMap={handleDownloadMap}
 //           onDownloadStory={handleDownloadStory}
 //           logo={logo}
+//           isOpen={isSidebarOpen}
+//           toggleSidebar={toggleSidebar}
 //         />
 //         <div className="map-and-controls" style={{ flexGrow: 1 }} ref={mapRef}>
 //           <MapComponent
@@ -116,6 +124,7 @@
 // };
 
 // export default App;
+
 import React, { useState, useRef } from 'react';
 import MapComponent from './components/MapComponent';
 import Sidebar from './components/Sidebar';
@@ -192,7 +201,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header toggleSidebar={toggleSidebar} />
       <div className="app-container">
         <Sidebar
           markers={markers}
