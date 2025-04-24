@@ -73,10 +73,10 @@ button:focus-visible {
   background-color: #c2323e;
   color: white;
   padding: 10px 0;
-  position: sticky;
+  position: sticky; /* Ensures header stays at the top */
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1000; /* High z-index to keep it on top */
   height: 60px;
 }
 
@@ -229,13 +229,18 @@ button:focus-visible {
 }
 
 .map-and-controls {
+  position: relative; /* Ensure it doesn't affect other elements */
   flex-grow: 1;
   display: flex;
+  height: calc(100vh - 60px); /* Adjust based on header height */
+  overflow: hidden; /* Prevents map controls from overflowing */
 }
 
 .map-container {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 1; /* Lower z-index than header */
 }
 
 .story-container {
